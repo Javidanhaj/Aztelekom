@@ -1,0 +1,194 @@
+Domen (Entity-lər)
+1) Category
+
+id, name (unique), createdAt
+
+2) Product
+
+id, name, sku (unique), price, stockQty, categoryId, status (ACTIVE/INACTIVE), createdAt
+
+4) Order
+
+id, customerId, status (NEW/PAID/CANCELLED/SHIPPED), totalAmount, createdAt
+
+
+5) OrderItem
+
+id, orderId, productId, qty, unitPrice, lineTotal
+
+
+
+
+Qaydalar
+
+Order yaradılarkən stockQty kifayət etməlidir → yetmirsə 400 error.
+
+Order CANCELLED olarsa stock geri qaytar (bonus).
+
+totalAmount backend-də hesablanmalıdır (front göndərməsin).
+
+
+
+REST Endpoint-lər (minimum)
+Categories
+
+GET /api/v1/categories
+
+POST /api/v1/categories
+
+GET /api/v1/categories/{id}
+
+PUT /api/v1/categories/{id}
+
+DELETE /api/v1/categories/{id}
+
+
+
+
+Products
+
+GET /api/v1/products?search=&categoryId=&status=&page=&size=&sort=
+
+POST /api/v1/products
+
+GET /api/v1/products/{id}
+
+PUT /api/v1/products/{id}
+
+DELETE /api/v1/products/{id}
+
+
+
+
+Customers
+
+GET /api/v1/customers?search=&page=&size=
+
+POST /api/v1/customers
+
+PUT /api/v1/customers/{id}
+
+DELETE /api/v1/customers/{id}
+
+
+
+
+Orders
+
+GET /api/v1/orders?status=&customerId=&dateFrom=&dateTo=&page=&size=
+
+POST /api/v1/orders (body: customerId + items[{productId, qty}])
+
+GET /api/v1/orders/{id} (order + items)
+
+PATCH /api/v1/orders/{id}/status (NEW→PAID/SHIPPED/CANCELLED)
+
+
+
+
+Validasiya (mütləq)
+
+product name boş ola bilməz, price > 0, stockQty >= 0
+
+category name min 2 simvol, unique
+
+order item qty >= 1
+
+Error Handling (mütləq)
+
+Standard JSON error format.
+
+
+
+
+JWT auth (ADMIN/STAFF) və ya Basic Auth (minimum)
+
+Audit Log: order_status_history (kim dəyişdi, nə vaxt) (bonus)
+
+internship/
+├── build.gradle
+├── settings.gradle
+├── gradlew
+├── gradlew.bat
+├── gradle/
+│   └── wrapper/
+│       ├── gradle-wrapper.jar
+│       └── gradle-wrapper.properties
+└── src/
+    ├── main/
+    │   ├── java/
+    │   │   └── com/
+    │   │       └── aztelekom/
+    │   │           └── internship/
+    │   │               ├── InternshipApplication.java
+    │   │               ├── config/
+    │   │               │   ├── CorsConfig.java
+    │   │               │   ├── SecurityConfig.java
+    │   │               │   └── OpenApiConfig.java
+    │   │               ├── controller/
+    │   │               │   ├── CategoryController.java
+    │   │               │   ├── ProductController.java
+    │   │               │   ├── CustomerController.java
+    │   │               │   └── OrderController.java
+    │   │               ├── dto/
+    │   │               │   ├── category/
+    │   │               │   │   ├── CategoryCreateRequest.java
+    │   │               │   │   ├── CategoryUpdateRequest.java
+    │   │               │   │   └── CategoryResponse.java
+    │   │               │   ├── product/
+    │   │               │   │   ├── ProductCreateRequest.java
+    │   │               │   │   ├── ProductUpdateRequest.java
+    │   │               │   │   └── ProductResponse.java
+    │   │               │   ├── customer/
+    │   │               │   │   ├── CustomerCreateRequest.java
+    │   │               │   │   ├── CustomerUpdateRequest.java
+    │   │               │   │   └── CustomerResponse.java
+    │   │               │   └── order/
+    │   │               │       ├── OrderCreateRequest.java
+    │   │               │       ├── OrderItemRequest.java
+    │   │               │       ├── OrderStatusUpdateRequest.java
+    │   │               │       ├── OrderResponse.java
+    │   │               │       └── OrderItemResponse.java
+    │   │               ├── domain/
+    │   │               │   ├── entities/
+    │   │               │   │   ├── Category.java
+    │   │               │   │   ├── Product.java
+    │   │               │   │   ├── Customer.java
+    │   │               │   │   ├── Order.java
+    │   │               │   │   └── OrderItem.java
+    │   │               │   └── enums/
+    │   │               │       ├── ProductStatus.java
+    │   │               │       └── OrderStatus.java
+    │   │               ├── mapper/
+    │   │               │   ├── CategoryMapper.java
+    │   │               │   ├── ProductMapper.java
+    │   │               │   ├── CustomerMapper.java
+    │   │               │   └── OrderMapper.java
+    │   │               ├── repository/
+    │   │               │   ├── CategoryRepository.java
+    │   │               │   ├── ProductRepository.java
+    │   │               │   ├── CustomerRepository.java
+    │   │               │   ├── OrderRepository.java
+    │   │               │   └── OrderItemRepository.java
+    │   │               ├── service/
+    │   │               │   ├── CategoryService.java           (interface)
+    │   │               │   ├── ProductService.java            (interface)
+    │   │               │   ├── CustomerService.java           (interface)
+    │   │               │   ├── OrderService.java              (interface)
+    │   │               │   └── impl/
+    │   │               │       ├── CategoryServiceImpl.java
+    │   │               │       ├── ProductServiceImpl.java
+    │   │               │       ├── CustomerServiceImpl.java
+    │   │               │       └── OrderServiceImpl.java
+    │   │               └── exception/
+    │   │                   ├── GlobalExceptionHandler.java
+    │   │                   ├── NotFoundException.java
+    │   │                   └── BadRequestException.java
+    │   └── resources/
+    │       └── application.yml
+    └── test/
+        └── java/
+            └── com/
+                └── aztelekom/
+                    └── internship/
+                        └── InternshipApplicationTests.java
