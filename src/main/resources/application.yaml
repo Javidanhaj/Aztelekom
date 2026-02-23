@@ -1,3 +1,16 @@
 spring:
   application:
     name: internship
+  datasource:
+    url: jdbc:mysql://localhost:3306/internship?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: 8080
