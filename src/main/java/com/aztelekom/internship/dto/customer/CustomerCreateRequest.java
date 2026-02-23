@@ -1,4 +1,7 @@
 package com.aztelekom.internship.dto.customer;
 
-public class CustomerCreateRequest {
-}
+public record CustomerCreateRequest(
+        String fullName,
+        String phone,
+        String email
+) {}
