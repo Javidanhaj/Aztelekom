@@ -4,11 +4,18 @@ import com.aztelekom.internship.domain.entities.Customer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CustomerRepository extends JpaRepository<Customer, Integer> {
+import java.util.UUID;
+
+@Repository
+public interface CustomerRepository extends JpaRepository<Customer, UUID> {
 
     Page<Customer> findByFullNameContainingIgnoreCaseOrPhoneContainingIgnoreCaseOrEmailContainingIgnoreCase(
-            String fullName, String phone, String email, Pageable pageable
+            String fullName,
+            String phone,
+            String email,
+            Pageable pageable
     );
 
 }
