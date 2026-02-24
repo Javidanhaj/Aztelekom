@@ -1,4 +1,4 @@
-package com.aztelekom.internship.domain.entities.enums;
+package com.aztelekom.internship.domain.enums;
 
 public enum OrderStatus {
     NEW, PAID, CANCELLED, SHIPPED

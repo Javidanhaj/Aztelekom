@@ -1,0 +1,103 @@
+[
+  {
+    "id": "TASK_1",
+    "priority": "HIGH",
+    "tags": [],
+    "title": "Finishing Order module",
+    "description": "Order and OrderItem",
+    "status": "IN_PROGRESS",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 24
+      },
+      "time": {
+        "hour": 16,
+        "minute": 12,
+        "second": 7,
+        "nano": 775709600
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_6",
+    "priority": "CRITICAL",
+    "tags": [],
+    "title": "Magistr",
+    "description": "Mentiq ve Informatika",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 24
+      },
+      "time": {
+        "hour": 16,
+        "minute": 20,
+        "second": 3,
+        "nano": 287422700
+      }
+    },
+    "dueDate": {
+      "date": {
+        "year": 2026,
+        "month": 4,
+        "day": 17
+      },
+      "time": {
+        "hour": 9,
+        "minute": 0,
+        "second": 0,
+        "nano": 0
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_9",
+    "priority": "MEDIUM",
+    "tags": [],
+    "title": "Product module",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 24
+      },
+      "time": {
+        "hour": 16,
+        "minute": 20,
+        "second": 31,
+        "nano": 234453100
+      }
+    },
+    "isImported": false
+  },
+  {
+    "id": "TASK_13",
+    "priority": "HIGH",
+    "tags": [],
+    "title": "Category module",
+    "description": "",
+    "status": "TODO",
+    "date": {
+      "date": {
+        "year": 2026,
+        "month": 2,
+        "day": 24
+      },
+      "time": {
+        "hour": 16,
+        "minute": 20,
+        "second": 39,
+        "nano": 930558600
+      }
+    },
+    "isImported": false
+  }
+]
