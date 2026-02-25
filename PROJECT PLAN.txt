@@ -1,32 +1,9 @@
 Domen (Entity-lər)
-
-1) Category - id, name (unique), createdAt
-
 2) Product - id, name, sku (unique), price, stockQty, categoryId,
 status (ACTIVE/INACTIVE), createdAt
 
-Qaydalar
-
-Order yaradılarkən stockQty kifayət etməlidir → yetmirsə 400 error.
-
-Order CANCELLED olarsa stock geri qaytar (bonus).
-
-totalAmount backend-də hesablanmalıdır (front göndərməsin).
-
-
 
 REST Endpoint-lər (minimum)
-ORDERS
-
-GET /api/v1/orders?status=&customerId=&dateFrom=&dateTo=&page=&size=
-
-POST /api/v1/orders (body: customerId + items[{productId, qty}])
-
-GET /api/v1/orders/{id} (order + items)
-
-PATCH /api/v1/orders/{id}/status (NEW→PAID/SHIPPED/CANCELLED)
-
-
 Categories
 
 GET /api/v1/categories
@@ -64,7 +41,12 @@ Error Handling (mütləq)
 
 Standard JSON error format.
 
+Qaydalar:
+Order yaradılarkən stockQty kifayət etməlidir → yetmirsə 400 error.
 
+Order CANCELLED olarsa stock geri qaytar (bonus).
+
+totalAmount backend-də hesablanmalıdır (front göndərməsin).
 
 
 JWT auth (ADMIN/STAFF) və ya Basic Auth (minimum)
