@@ -1,23 +1,9 @@
 Domen (Entity-lər)
-1) Category
 
-id, name (unique), createdAt
+1) Category - id, name (unique), createdAt
 
-2) Product
-
-id, name, sku (unique), price, stockQty, categoryId, status (ACTIVE/INACTIVE), createdAt
-
-4) Order
-
-id, customerId, status (NEW/PAID/CANCELLED/SHIPPED), totalAmount, createdAt
-
-
-5) OrderItem
-
-id, orderId, productId, qty, unitPrice, lineTotal
-
-
-
+2) Product - id, name, sku (unique), price, stockQty, categoryId,
+status (ACTIVE/INACTIVE), createdAt
 
 Qaydalar
 
@@ -30,6 +16,17 @@ totalAmount backend-də hesablanmalıdır (front göndərməsin).
 
 
 REST Endpoint-lər (minimum)
+ORDERS
+
+GET /api/v1/orders?status=&customerId=&dateFrom=&dateTo=&page=&size=
+
+POST /api/v1/orders (body: customerId + items[{productId, qty}])
+
+GET /api/v1/orders/{id} (order + items)
+
+PATCH /api/v1/orders/{id}/status (NEW→PAID/SHIPPED/CANCELLED)
+
+
 Categories
 
 GET /api/v1/categories
@@ -42,9 +39,6 @@ PUT /api/v1/categories/{id}
 
 DELETE /api/v1/categories/{id}
 
-
-
-
 Products
 
 GET /api/v1/products?search=&categoryId=&status=&page=&size=&sort=
@@ -56,34 +50,6 @@ GET /api/v1/products/{id}
 PUT /api/v1/products/{id}
 
 DELETE /api/v1/products/{id}
-
-
-
-
-Customers
-
-GET /api/v1/customers?search=&page=&size=
-
-POST /api/v1/customers
-
-PUT /api/v1/customers/{id}
-
-DELETE /api/v1/customers/{id}
-
-
-
-
-Orders
-
-GET /api/v1/orders?status=&customerId=&dateFrom=&dateTo=&page=&size=
-
-POST /api/v1/orders (body: customerId + items[{productId, qty}])
-
-GET /api/v1/orders/{id} (order + items)
-
-PATCH /api/v1/orders/{id}/status (NEW→PAID/SHIPPED/CANCELLED)
-
-
 
 
 Validasiya (mütləq)
