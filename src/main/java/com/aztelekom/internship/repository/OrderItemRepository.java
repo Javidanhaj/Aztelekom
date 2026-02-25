@@ -10,5 +10,5 @@ import java.util.UUID;
 @Repository
 public interface OrderItemRepository extends CrudRepository<OrderItem, UUID> {
 
-     List<OrderItem> findByOrder_id(UUID orderId);
+     List<OrderItem> findByOrder_Id(UUID orderId);
 }

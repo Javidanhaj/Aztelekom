@@ -14,7 +14,7 @@ import java.util.UUID;
 public interface OrderService {
 
     Page<Order> getOrders(OrderStatus status, UUID customerId, LocalDate dateFrom, LocalDate dateTo, Pageable pageable);
-    Order createOrder(OrderCreateRequest orderCreateRequest);
+    Order createOrder(OrderCreateRequest request);
     Order getOrderById(UUID id);
     Order updateOrderStatus(UUID id, OrderStatusUpdateRequest request);
     void deleteOrder(UUID id);
