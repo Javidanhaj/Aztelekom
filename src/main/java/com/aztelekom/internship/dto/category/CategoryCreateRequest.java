@@ -1,5 +1,8 @@
 package com.aztelekom.internship.dto.category;
 
-public record CategoryCreateRequest() {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-}
+public record CategoryCreateRequest(
+
+) {}

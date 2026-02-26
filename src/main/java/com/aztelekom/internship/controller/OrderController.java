@@ -8,6 +8,7 @@ import com.aztelekom.internship.dto.order.OrderStatusUpdateRequest;
 import com.aztelekom.internship.mapper.OrderMapper;
 import com.aztelekom.internship.service.OrderService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,16 +21,12 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
 public class OrderController {
 
     private final OrderService orderService;
     private final OrderMapper orderMapper;
-
-    public OrderController(OrderService orderService, OrderMapper orderMapper) {
-        this.orderService = orderService;
-        this.orderMapper = orderMapper;
-    }
 
     @GetMapping
     public Page<OrderResponse> getOrders(
