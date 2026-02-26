@@ -3,6 +3,7 @@ package com.aztelekom.internship.mapper;
 import com.aztelekom.internship.domain.entities.Product;
 import com.aztelekom.internship.dto.product.ProductCreateRequest;
 import com.aztelekom.internship.dto.product.ProductResponse;
+import com.aztelekom.internship.dto.product.ProductUpdateRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -21,5 +22,5 @@ public interface ProductMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "category", ignore = true)
-    Product updateToEntity(ProductCreateRequest request, @MappingTarget Product product);
+    Product updateToEntity(ProductUpdateRequest request, @MappingTarget Product product);
 }
