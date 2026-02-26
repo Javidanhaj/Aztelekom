@@ -5,7 +5,7 @@
     "tags": [],
     "title": "Finishing Order module",
     "description": "Order and OrderItem",
-    "status": "IN_PROGRESS",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
@@ -62,7 +62,7 @@
     "tags": [],
     "title": "Product module",
     "description": "",
-    "status": "TODO",
+    "status": "IN_PROGRESS",
     "date": {
       "date": {
         "year": 2026,
@@ -84,7 +84,7 @@
     "tags": [],
     "title": "Category module",
     "description": "",
-    "status": "TODO",
+    "status": "DONE",
     "date": {
       "date": {
         "year": 2026,
