@@ -1,0 +1,23 @@
+package com.aztelekom.internship.repository;
+
+import com.aztelekom.internship.domain.entities.Product;
+import com.aztelekom.internship.domain.enums.ProductStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface ProductRepository extends JpaRepository<Product, UUID> {
+    boolean existsBySkuIgnoreCase(String sku);
+
+    Page<Product> findByStatus(ProductStatus status, Pageable pageable);
+
+    Page<Product> findByCategory_Id(UUID categoryId, Pageable pageable);
+
+    Page<Product> findByStatusAndCategory_Id(ProductStatus status, UUID categoryId, Pageable pageable);
+
+    Page<Product> findByNameContainingIgnoreCaseOrSkuContainingIgnoreCase(String name, String sku, Pageable pageable);
+}
