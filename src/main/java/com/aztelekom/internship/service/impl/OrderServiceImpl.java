@@ -3,6 +3,7 @@ package com.aztelekom.internship.service.impl;
 import com.aztelekom.internship.domain.entities.Customer;
 import com.aztelekom.internship.domain.entities.Order;
 import com.aztelekom.internship.domain.entities.OrderItem;
+import com.aztelekom.internship.domain.entities.Product;
 import com.aztelekom.internship.domain.enums.OrderStatus;
 import com.aztelekom.internship.dto.order.OrderCreateRequest;
 import com.aztelekom.internship.dto.order.OrderItemRequest;
@@ -10,6 +11,7 @@ import com.aztelekom.internship.dto.order.OrderStatusUpdateRequest;
 import com.aztelekom.internship.repository.CustomerRepository;
 import com.aztelekom.internship.repository.OrderItemRepository;
 import com.aztelekom.internship.repository.OrderRepository;
+import com.aztelekom.internship.repository.ProductRepository;
 import com.aztelekom.internship.service.OrderService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -23,6 +25,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -31,11 +34,13 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
     private final OrderItemRepository orderItemRepository;
     private final CustomerRepository customerRepository;
+    private final ProductRepository productRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, CustomerRepository customerRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, CustomerRepository customerRepository, ProductRepository productRepository) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.customerRepository = customerRepository;
+        this.productRepository = productRepository;
     }
 
     @Override
