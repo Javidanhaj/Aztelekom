@@ -1,38 +1,3 @@
-REST Endpoint-lər (minimum)
-
-Products
-
-GET /api/v1/products?search=&categoryId=&status=&page=&size=&sort=
-
-POST /api/v1/products
-
-GET /api/v1/products/{id}
-
-PUT /api/v1/products/{id}
-
-DELETE /api/v1/products/{id}
-
-
-Validasiya (mütləq)
-
-product name boş ola bilməz, price > 0, stockQty >= 0
-
-category name min 2 simvol, unique
-
-order item qty >= 1
-
-Error Handling (mütləq)
-
-Standard JSON error format.
-
-Qaydalar:
-Order yaradılarkən stockQty kifayət etməlidir → yetmirsə 400 error.
-
-Order CANCELLED olarsa stock geri qaytar (bonus).
-
-totalAmount backend-də hesablanmalıdır (front göndərməsin).
-
-
 JWT auth (ADMIN/STAFF) və ya Basic Auth (minimum)
 
 Audit Log: order_status_history (kim dəyişdi, nə vaxt) (bonus)
