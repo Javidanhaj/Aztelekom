@@ -6,6 +6,10 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+app:
+  jwt:
+    secret: "+aJnzJ7F+ToevKy2mGui6Qhqv1ixmplY/0AKljkhL+c="
+    ttlMinutes: 60
 
   jpa:
     hibernate:
