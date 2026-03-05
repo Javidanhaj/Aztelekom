@@ -1,3 +1,0 @@
-JWT auth (ADMIN/STAFF)
-
-Audit Log: order_status_history (kim dəyişdi, nə vaxt)
