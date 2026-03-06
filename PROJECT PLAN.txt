@@ -1,3 +1,0 @@
-JWT auth (ADMIN/STAFF) və ya Basic Auth (minimum)
-
-Audit Log: order_status_history (kim dəyişdi, nə vaxt) (bonus)

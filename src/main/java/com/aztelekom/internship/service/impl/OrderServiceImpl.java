@@ -1,17 +1,13 @@
 package com.aztelekom.internship.service.impl;
 
-import com.aztelekom.internship.domain.entities.Customer;
-import com.aztelekom.internship.domain.entities.Order;
-import com.aztelekom.internship.domain.entities.OrderItem;
-import com.aztelekom.internship.domain.entities.Product;
+import com.aztelekom.internship.domain.entities.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import com.aztelekom.internship.domain.enums.OrderStatus;
 import com.aztelekom.internship.dto.order.OrderCreateRequest;
 import com.aztelekom.internship.dto.order.OrderItemRequest;
 import com.aztelekom.internship.dto.order.OrderStatusUpdateRequest;
-import com.aztelekom.internship.repository.CustomerRepository;
-import com.aztelekom.internship.repository.OrderItemRepository;
-import com.aztelekom.internship.repository.OrderRepository;
-import com.aztelekom.internship.repository.ProductRepository;
+import com.aztelekom.internship.repository.*;
 import com.aztelekom.internship.service.OrderService;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -35,12 +31,14 @@ public class OrderServiceImpl implements OrderService {
     private final OrderItemRepository orderItemRepository;
     private final CustomerRepository customerRepository;
     private final ProductRepository productRepository;
+    private final OrderStatusHistoryRepository orderStatusHistoryRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, CustomerRepository customerRepository, ProductRepository productRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderItemRepository orderItemRepository, CustomerRepository customerRepository, ProductRepository productRepository, OrderStatusHistoryRepository orderStatusHistoryRepository) {
         this.orderRepository = orderRepository;
         this.orderItemRepository = orderItemRepository;
         this.customerRepository = customerRepository;
         this.productRepository = productRepository;
+        this.orderStatusHistoryRepository = orderStatusHistoryRepository;
     }
 
     @Override
@@ -118,10 +116,15 @@ public class OrderServiceImpl implements OrderService {
     @Override
     @Transactional
     public Order updateOrderStatus(UUID id, OrderStatusUpdateRequest request) {
-        Order order = orderRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Order not found with id " + id));
+        Order order = orderRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Order not found with id " + id));
 
-        OrderStatus newStatus = request.status();
         OrderStatus oldStatus = order.getStatus();
+        OrderStatus newStatus = request.status();
+
+        if (oldStatus == newStatus) {
+            return order;
+        }
 
         if (newStatus == OrderStatus.CANCELLED && oldStatus != OrderStatus.CANCELLED) {
             List<OrderItem> items = orderItemRepository.findByOrder_Id(id);
@@ -136,8 +139,20 @@ public class OrderServiceImpl implements OrderService {
             productRepository.saveAll(updatedProducts);
         }
 
+        // Order status update
         order.setStatus(newStatus);
-        return orderRepository.save(order);
+        Order savedOrder = orderRepository.save(order);
+
+
+        OrderStatusHistory history = new OrderStatusHistory();
+        history.setOrder(savedOrder);
+        history.setOldStatus(oldStatus);
+        history.setNewStatus(newStatus);
+        history.setChangedBy(getCurrentUsername());
+
+        orderStatusHistoryRepository.save(history);
+
+        return savedOrder;
     }
 
     @Override
@@ -146,5 +161,16 @@ public class OrderServiceImpl implements OrderService {
             throw new EntityNotFoundException("Order with id " + id + " not found.");
         }
         orderRepository.deleteById(id);
+    }
+
+    private String getCurrentUsername() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return "SYSTEM";
+        }
+
+        String name = authentication.getName();
+        return (name == null || name.isBlank()) ? "SYSTEM" : name;
     }
 }
