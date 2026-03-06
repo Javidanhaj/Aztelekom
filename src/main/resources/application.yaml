@@ -6,10 +6,17 @@ spring:
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
 app:
   jwt:
     secret: "+aJnzJ7F+ToevKy2mGui6Qhqv1ixmplY/0AKljkhL+c="
     ttlMinutes: 60
+
+logging:
+  level:
+    org.hibernate.tool.schema: DEBUG
 
   jpa:
     hibernate:
